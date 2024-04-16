@@ -1,0 +1,15 @@
+@import "./_variables";
+
+body {
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+  background-color: $veryLightGreen;
+  text-transform: capitalize;
+}
+
+h1 {
+  width: 100vw;
+  height: 100vh;
+  text-align: center;
+}
