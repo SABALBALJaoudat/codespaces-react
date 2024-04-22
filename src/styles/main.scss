@@ -13,3 +13,215 @@ h1 {
   height: 100vh;
   text-align: center;
 }
+
+.sidebar {
+  background-color: white;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 2rem 2rem;
+  height: 100vh;
+  width: 14rem;
+  transition: all 1s;
+
+  .logoContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+
+    .logo {
+      font-size: $logoFont;
+      font-weight: $heavyFont;
+      color: $darkGreen;
+    }
+
+    h2.title {
+      font-size: 28px;
+      color: $darkGrey;
+    }
+  }
+
+  .burgerContainer {
+    content: '';
+    background-color: $green;
+    position: absolute;
+    right: calc(-35px / 2);
+    top: calc(7rem / 1.15);
+    width: 35px;
+    height: 35px;
+    z-index: 1;
+    border-radius: 2rem;
+    cursor: pointer;
+
+    .burgerTrigger {
+      content: '';
+      position: relative;
+      width: 35px;
+      height: 35px;
+      z-index: 2;
+    }
+
+    .burgerMenu {
+      content: "";
+      background-color: $white;
+      position: relative;
+      z-index: 1;
+      width: 20px;
+      height: 3px;
+      border-radius: 2rem;
+      bottom: calc(35px / 2);
+      left: 0.45rem;
+      background-color: $green;
+      transition: all 1s;
+    }
+
+    .burgerMenu::after {
+      content: "";
+      background-color: $white;
+      position: absolute;
+      z-index: 1;
+      width: 20px;
+      height: 3px;
+      border-radius: 2rem;
+      top: 0.4rem;
+      transform: translateY(-0.4rem) rotate(45deg);
+      transition: all 1s;
+    }
+
+    .burgerMenu::before {
+      content: "";
+      background-color: $white;
+      position: absolute;
+      z-index: 1;
+      width: 20px;
+      height: 3px;
+      border-radius: 2rem;
+      top: -0.4rem;
+      transform: translateY(0.4rem) rotate(-45deg);
+      transition: all 1s;
+    }
+  }
+
+  // ligne de séparation
+  .burgerContainer::after {
+    content: '';
+    position: absolute;
+    right: 35px;
+    top: calc(35px / 2);
+    z-index: 0;
+    width: calc(6rem + 15rem);
+    background-color: $lightGrey;
+    height: 2px;
+  }
+
+  .profileContainers {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: fit-content;
+    height: 100px;
+    background-color: aqua;
+
+    .profileContents {
+      padding: 0 0 0 1rem;
+      opacity: 100;
+      transition: all 1s;
+
+      p.name {
+        font-size: 18px;
+        color: $darkGrey;
+        font-family: $heavyFont;
+        text-transform: capitalize;
+      }
+
+      p {
+        font-size: 14px;
+        color: $darkGrey;
+        font-family: $lightFont;
+        text-transform: lowercase;
+      }
+    }
+  }
+
+  .contentsContainer {
+    margin: 1rem 0 0 0;
+
+    ul {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-direction: column;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      li {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        flex-direction: column;
+        padding: 0.5rem 0;
+        margin: 0.5rem 0;
+        width: 100%;
+        border-radius: 1rem;
+
+        img {
+          padding: 0 1rem 0 0.5rem;
+        }
+
+        a {
+          text-decoration: none;
+          color: $darkGrey;
+          font-size: 20px;
+          opacity: 100;
+          transition: all 1s;
+        }
+      }
+    }
+  }
+}
+
+.sidebar.active {
+  width: 3rem;
+  transition: all 1s;
+
+  .logoContainer {
+    width: 50px;
+    background-color: red;
+  }
+
+  .burgerContainer.active {
+
+    .burgerMenu {
+      background-color: $white;
+      transition: all 1s;
+    }
+
+    .burgerMenu::before {
+      transform: translateY(0rem) rotate(0deg);
+      transition: all 0.4s;
+    }
+
+    .burgerMenu::after {
+      transform: translateY(0rem) rotate(0deg);
+      transition: all 0.4s;
+    }
+  }
+
+  .profileContainers {
+    .profileContents {
+      opacity: 0;
+      display: none;
+      transition: all 1s;
+    }
+  }
+
+  .contentsContainer {
+    a {
+      opacity: 0;
+      display: none;
+      transition: all 1s;
+    }
+  }
+}
