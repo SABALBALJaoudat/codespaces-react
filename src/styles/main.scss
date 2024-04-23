@@ -8,15 +8,22 @@ body {
   text-transform: capitalize;
 }
 
+.App {
+  display: flex;
+  flex-direction: row;
+}
+
+.title {
+  flex-grow: 1;
+}
+
 h1 {
-  width: 100vw;
-  height: 100vh;
   text-align: center;
 }
 
 .sidebar {
   background-color: white;
-  position: absolute;
+  position: relative;
   top: 0;
   left: 0;
   padding: 2rem 2rem;
@@ -29,6 +36,7 @@ h1 {
     justify-content: center;
     align-items: center;
     margin-bottom: 20px;
+    // width: 50px;
 
     .logo {
       font-size: $logoFont;
@@ -171,12 +179,25 @@ h1 {
         }
 
         a {
+          box-sizing: border-box;
           text-decoration: none;
           color: $darkGrey;
           font-size: 20px;
           opacity: 100;
           transition: all 1s;
+          padding: 0 0 0 0.5rem;
+          width: 100%;
         }
+      }
+
+      li:hover {
+        background-color: $lightGrey;
+        transition: all 1s;
+      }
+
+      li.selected {
+        background-color: $lightGrey;
+        transition: all 1s;
       }
     }
   }
@@ -186,10 +207,9 @@ h1 {
   width: 3rem;
   transition: all 1s;
 
-  .logoContainer {
-    width: 50px;
-    background-color: red;
-  }
+  // .logoContainer {
+  //   width: 50px;
+  // }
 
   .burgerContainer.active {
 

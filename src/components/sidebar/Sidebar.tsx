@@ -31,11 +31,11 @@ function Sidebar() {
 
       <div className="contentsContainer">
         <ul>
-          <li>
+          <li className={location.pathname === "/" ? "selected" : ""}>
             <img></img>
             <a href="/">Page 1</a>
           </li>
-          <li>
+          <li className={location.pathname === "/page2" ? "selected" : ""}>
             <img></img>
             <a href="/page2">Page 2</a>
           </li>
