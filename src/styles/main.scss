@@ -13,8 +13,9 @@ body {
   flex-direction: row;
 }
 
-.title {
+.page {
   flex-grow: 1;
+  padding: 18px;
 }
 
 h1 {
@@ -129,7 +130,7 @@ h1 {
     justify-content: flex-start;
     width: fit-content;
     height: 100px;
-    background-color: aqua;
+    // background-color: aqua;
 
     .profileContents {
       padding: 0 0 0 1rem;
@@ -244,4 +245,16 @@ h1 {
       transition: all 1s;
     }
   }
+}
+
+.map-wrap {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 157px); /* calculate height of the screen minus the heading */
+}
+
+.map {
+  position: absolute;
+  width: 100%;
+  height: 100%;
 }

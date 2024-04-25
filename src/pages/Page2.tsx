@@ -24,8 +24,8 @@ function Page2() {
 
 
     return (
-        <div>
-            <h2>Station météo</h2>
+        <div className='page'>
+            <h1>Station météo</h1>
             <p>On va récupérer les valeurs des opendata de la ville</p>
             <ul>
                 {stationsMeteo.map(station => (
