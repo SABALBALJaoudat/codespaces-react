@@ -43,6 +43,10 @@ function Sidebar() {
             <img></img>
             <a href="/page3">Page 3</a>
           </li>
+          <li className={location.pathname === "/page4" ? "selected" : ""}>
+            <img></img>
+            <a href="/page4">Page 4</a>
+          </li>
         </ul>
       </div>
     </div>

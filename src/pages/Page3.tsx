@@ -11,7 +11,7 @@ interface StationMeteo {
 
 function Page3() {
     const mapContainer = useRef(null);
-    // const map = useRef(null);
+
     const [userPosition, setUserPosition] = useState({ lng: 1.452060306, lat: 43.58843456 });
     const [zoom] = useState(15);
     maptilersdk.config.apiKey = 'In2ch0rSI79Yg3PtnAus';
@@ -38,10 +38,30 @@ function Page3() {
     useEffect(() => {
         // Créer de nouveaux marqueurs et les ajouter à la carte
         const newMarkers = stationsMeteo.map(station => {
-            const marker = new maptilersdk.Marker({ color: "#00FF00" })
+            // create DOM element for the marker
+            var el = document.createElement('div');
+            el.id = 'Map marker';
+            const marker = new maptilersdk.Marker({ color: "#00FF00", clickTolerance: 1000 })
                 .setLngLat([station.longitude, station.latitude])
                 .setPopup(new maptilersdk.Popup().setHTML(`<h3>${station.id_nom}</h3><br/>longitude : ${station.longitude} / latitude : ${station.latitude}`))
                 .addTo(map.current!);
+
+            // Ajouter un gestionnaire d'événement de clic à chaque marqueur
+            marker.on('click', function () {
+                console.log('Marker cliqué :', station);
+            });
+
+            // Change the cursor to a pointer when the mouse is over the marker.
+            marker.on('mouseenter', function () {
+                map.current!.getCanvas().style.cursor = 'pointer';
+            });
+
+            // Change it back to a pointer when it leaves.
+            marker.on('mouseleave', function () {
+                map.current!.getCanvas().style.cursor = '';
+            });
+
+            // console.log('Marker créé :', marker);
 
             return marker;
         });
@@ -51,7 +71,6 @@ function Page3() {
     }, [stationsMeteo]);
 
     useEffect(() => {
-        // if (map.current) return;
         map.current?.remove();
 
         console.log("userPosition", userPosition)
@@ -67,25 +86,29 @@ function Page3() {
             geolocate: true,
         });
 
-        // map.current.addLayer({
-        //     "id": "background",
-        //     "type": "background",
-        //     "layout": {
-        //         "visibility": "visible"
-        //     },
-        //     "paint": {
-        //         "background-color": {
-        //             "stops": [
-        //                 [
-        //                     6,
-        //                     "hsl(60,20%,85%)"
-        //                 ],
-        //                 [
-        //                     20,
-        //                     "hsl(60,24%,90%)"
+        map.current.on('click', function (e) {
+            // The event object (e) contains information like the
+            // coordinates of the point on the map that was clicked.
+            console.log('A click event has occurred at ' + e.lngLat);
+        });
+
+        console.log('map.current :', map.current);
+
+        // map.current.addSource('some id', {
+        //     type: 'geojson',
+        //     data: {
+        //         "type": "FeatureCollection",
+        //         "features": [{
+        //             "type": "Feature",
+        //             "properties": {},
+        //             "geometry": {
+        //                 "type": "Point",
+        //                 "coordinates": [
+        //                     -76.53063297271729,
+        //                     39.18174077994108
         //                 ]
-        //             ]
-        //         } as maptilersdk.PropertyValueSpecification<string> | undefined
+        //             }
+        //         }]
         //     }
         // });
 
