@@ -21,28 +21,6 @@ function Page3() {
     const [stationsMeteo, setStationsMeteo] = useState<StationMeteo[]>([]);
 
     useEffect(() => {
-        // Fonction de récupération de la localisation de l'utilisateur
-        const getUserLocation = () => {
-            // Vérifie si le navigateur prend en charge la géolocalisation
-            if (navigator.geolocation) {
-                // Demande la position de l'utilisateur
-                navigator.geolocation.getCurrentPosition(
-                    position => {
-                        setUserPosition({ lng: position.coords.longitude, lat: position.coords.latitude });
-                        console.log('Localisation de l\'utilisateur selon le site :', position.coords.longitude, position.coords.latitude);
-                    },
-                    error => {
-                        console.error('Erreur de géolocalisation :', error);
-                    }
-                );
-            } else {
-                console.error('La géolocalisation n\'est pas supportée par ce navigateur.');
-            }
-        };
-
-        // Appel de la fonction pour récupérer la localisation de l'utilisateur
-        getUserLocation();
-
         // Récupérer les données des stations météo
         fetch('https://data.toulouse-metropole.fr/api/explore/v2.1/catalog/datasets/stations-meteo-en-place/records?select=longitude%2Clatitude%2Cid_numero%2Cid_nom&limit=100')
             .then(response => response.json())
@@ -81,13 +59,35 @@ function Page3() {
         map.current = new maptilersdk.Map({
             container: mapContainer.current!,
             style: maptilersdk.MapStyle.STREETS,
-            center: [userPosition.lng, userPosition.lat],
+            // center: [userPosition.lng, userPosition.lat],
             zoom: zoom,
             fullscreenControl: "top-left",
             terrainControl: true,
-            // bearing: 50,
             pitch: 45,
+            geolocate: true,
         });
+
+        // map.current.addLayer({
+        //     "id": "background",
+        //     "type": "background",
+        //     "layout": {
+        //         "visibility": "visible"
+        //     },
+        //     "paint": {
+        //         "background-color": {
+        //             "stops": [
+        //                 [
+        //                     6,
+        //                     "hsl(60,20%,85%)"
+        //                 ],
+        //                 [
+        //                     20,
+        //                     "hsl(60,24%,90%)"
+        //                 ]
+        //             ]
+        //         } as maptilersdk.PropertyValueSpecification<string> | undefined
+        //     }
+        // });
 
     }, [userPosition]);
 
